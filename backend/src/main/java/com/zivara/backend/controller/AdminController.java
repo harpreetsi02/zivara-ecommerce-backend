@@ -1,16 +1,19 @@
 package com.zivara.backend.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.zivara.backend.dto.OrderResponse;
 import com.zivara.backend.dto.ProfileResponse;
 import com.zivara.backend.model.Order;
 import com.zivara.backend.model.User;
 import com.zivara.backend.repository.OrderRepository;
 import com.zivara.backend.repository.UserRepository;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -25,7 +28,7 @@ public class AdminController {
         this.userRepository = userRepository;
     }
 
-    // GET /api/admin/orders — saare orders
+    // GET /api/admin/orders — saare orders 
     @GetMapping("/orders")
     public ResponseEntity<List<OrderResponse>> getAllOrders() {
         List<Order> orders = orderRepository.findAll();
