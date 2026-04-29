@@ -10,5 +10,3 @@ public class BackendApplication {
 	}
 
 }
-
-//1TY1D94Q19GC2794P7YVFV5U
