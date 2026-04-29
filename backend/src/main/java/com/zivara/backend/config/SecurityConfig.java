@@ -2,6 +2,7 @@ package com.zivara.backend.config;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -69,14 +70,22 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+//    @Value("${ALLOWED_ORIGINS:http://localhost:3000}")
+//    private String allowedOrigins;
+
     // CORS config — Next.js (localhost:3000) ko allow karo
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("http://localhost:3000"));
+        config.setAllowedOrigins(List.of(
+                "http://localhost:3000",
+                "https://zivara-ashen.vercel.app",
+                "https://zivara-ecommerce-admin.vercel.app"
+                ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
+        config.setMaxAge(3600L);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
